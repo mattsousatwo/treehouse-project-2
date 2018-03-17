@@ -32,9 +32,8 @@ class ViewController: UIViewController {
     
     
     
-    let trivia = Questions()
-    let answers = Answers()
-    
+    var trivia = TriviaQA()
+ 
     
     @IBOutlet weak var questionField: UILabel!
     @IBOutlet weak var trueButton: UIButton!     // 1st button a)
@@ -50,89 +49,73 @@ class ViewController: UIViewController {
         loadGameStartSound()
         // Start game
         playGameStartSound()
-        checkQuestions()      // _____ error
         displayQuestion()
         displayAnswers()
         
+        
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     
-    
-    
-    // displayQuestion() this function will pull a random question from the randomFact function inside the Questions struct
-        // should possibly check if the question was already shown
-    func displayQuestion() {
-       let questionDisplay = trivia.randomFact()
-        questionField.text = questionDisplay
+    // displayQuestion() this function will pull a random question from the question bank
+    func displayQuestion()  {
+        let number = questionIndex
+        let question = trivia.randomQuestion(questionIndex: number)
+        questionField.text = question
+        
         playAgainButton.isHidden = true
+        
     }
-
-    
-    // questionField.text = trivia.randomFact()
-
-
 
 
     // displayAmswers() this function will display the correct answers for each array, and then add that question from the questionsArray to a new array called shownQuestions
     func displayAnswers() {
-        if questionField.text == trivia.questionsArray[0] {             // Question One
-            shownQuestion.append(trivia.questionsArray[0])
-            trueButton.setTitle(answers.questionOneAnswers[0], for: .normal) // correct answer
-            buttonTwo.setTitle(answers.questionOneAnswers[1], for: .normal)
-            falseButton.setTitle(answers.questionOneAnswers[2], for: .normal)
-            buttonFour.setTitle(answers.questionOneAnswers[3],for: .normal)
-        }
-        else if questionField.text == trivia.questionsArray[1] {        // Question Two
-            shownQuestion.append(trivia.questionsArray[1])
-            trueButton.setTitle(answers.questionTwoAnswers[0], for: .normal)
-            buttonTwo.setTitle(answers.questionTwoAnswers[1], for: .normal) // correct answer
-            falseButton.setTitle(answers.questionTwoAnswers[2], for: .normal)
-            buttonFour.setTitle(answers.questionTwoAnswers[3],for: .normal)
-        }
-        else if questionField.text == trivia.questionsArray[2] {        // Question Three
-            shownQuestion.append(trivia.questionsArray[2])
-            trueButton.setTitle(answers.questionThreeAnswers[0], for: .normal) // correct answer
-            buttonTwo.setTitle(answers.questionThreeAnswers[1], for: .normal)
-            falseButton.setTitle(answers.questionThreeAnswers[2], for: .normal)
-            buttonFour.setTitle(answers.questionThreeAnswers[3],for: .normal)
-        }
-        else if questionField.text == trivia.questionsArray[3] {        // Question Four
-            shownQuestion.append(trivia.questionsArray[3])
-            trueButton.setTitle(answers.questionFourAnswers[0], for: .normal)
-            buttonTwo.setTitle(answers.questionFourAnswers[1], for: .normal)
-            falseButton.setTitle(answers.questionFourAnswers[2], for: .normal) // correct answer
-            buttonFour.setTitle(answers.questionFourAnswers[3],for: .normal)
-        }
+        let number = questionIndex
+        let answersArray = trivia.getAnswers(questionIndex: number)
+        trueButton.setTitle(answersArray[0], for: .normal)
+        buttonTwo.setTitle(answersArray[1], for: .normal)
+        falseButton.setTitle(answersArray[2], for: .normal)
+        buttonFour.setTitle(answersArray[3], for: .normal)
+       
     }
     
     
     
     
     
-   
-    //           !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ERROR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     // checkQuestions() this func will check the text in the questionField and if the displayedQuestion is equal to a question in shownQuestion (an array of questions that have already been asked) then run the displayQuestion func again, else the text in the questionField will equal the displayedQuestion
     
-    func checkQuestions() {
-        let displayedQuestion = questionField.text
-        for question in shownQuestion {
-            if displayedQuestion == question {
-                displayQuestion()
-            } else if displayedQuestion != question{
-                questionField.text = displayedQuestion
-            }
     
-        }
+    
+    
+    
+    
+    
+    
+    
+    // remove questions from question bank and added to an array of used questions
+    func removeQuestion() {
+        trivia.usedQuestions.append(trivia.questions[questionIndex])
+        trivia.questions.remove(at: questionIndex)
     }
-
-
-    //                  ________________________________________________________________________________
+    
+    // questions brought back to the questions bank from the used questions array
+    func reviveQuestions() {
+        trivia.questions.append(contentsOf: trivia.usedQuestions)
+        trivia.usedQuestions.removeAll()
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -148,6 +131,7 @@ class ViewController: UIViewController {
         // Display play again button
         playAgainButton.isHidden = false
         
+        // Display closing message
         questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
         
     }
@@ -163,59 +147,61 @@ class ViewController: UIViewController {
      */
      
      
-     /*
-     
-     switch questionField.text {
-     case questionField.text == trivia.questionsArray[0]: correctAnswer = trueButton
-     case trivia.questionsArray[1]: correctAnswer = buttonTwo
-     case trivia.questionsArray[2]: correctAnswer = trueButton
-     case trivia.questionsArray[3]: correctAnswer = falseButton
-     default:
-     }
-     */
- 
-    
+   
     // checkAnswers() this function will check if the answer button being pressed is the corresponding correct answer for the displayed question. When the correct answer is selected then the correctQuestions array is incremented by one, and will display a string saying that the user is correct, or wrong if a wrong answer is selected. when an answer is correct, the questionsAsked array is also incremented by one.
     @IBAction func checkAnswer(_ sender: UIButton) {
-        // pulling an error if correct or wrong button is pressed
+        
         var correctAnswer: UIButton = sender
         
-        if questionField.text == trivia.questionsArray[0] {
+        if questionField.text == trivia.randomQuestion(questionIndex: 0) {
             correctAnswer = trueButton
-        } else if questionField.text == trivia.questionsArray[1] {
+        } else if questionField.text == trivia.randomQuestion(questionIndex: 1) {
             correctAnswer = buttonTwo
-        } else if questionField.text == trivia.questionsArray[2] {
+        } else if questionField.text == trivia.randomQuestion(questionIndex: 2) {
             correctAnswer = trueButton
-        } else if questionField.text == trivia.questionsArray[3] {
+        } else if questionField.text == trivia.randomQuestion(questionIndex: 3) {
             correctAnswer = falseButton
         }
         
+    //    (sender === trueButton && trueButton.titleLabel!.text == trivia.correctAnswer(randomNumber: 0))
+        
+        
         // Increment the questions asked counter
         questionsAsked += 1
+      
         if (sender === trueButton && correctAnswer == trueButton) || (sender === buttonTwo && correctAnswer == buttonTwo) || (sender === falseButton && correctAnswer == falseButton) || (sender === buttonFour && correctAnswer == buttonFour) {
+            
             correctQuestions += 1
+            
             questionField.text = "Correct!"
         } else {
             questionField.text = "Sorry, wrong answer!"
         }
         
+        // remove question from question bank
+        removeQuestion()
         loadNextRoundWithDelay(seconds: 1)
     }
+    
     
     
     // nextRound() nextRound will bring up the questions and buttons if questions asked is less than the number of questionsPerRound.
     func nextRound() {
         if questionsAsked == questionsPerRound {
-            // Game is over
-            displayScore()
-        } else {
-            // Continue game
-            displayQuestion()
-            checkQuestions()        // _____________
-            displayAnswers()
+                            // Game is over
             
+            displayScore()
+        } else {            // Continue game
+           
+            // choose random number
+            trivia.getRandomNumber()
+            
+            // use random number to choose and  display quesetion and answer pairs
+            displayQuestion()
+            displayAnswers()
         }
     }
+    
     
     // setting the playAgains action to show the answer buttons after play again is pressed. questions asked and correct questions are reset to 0, and the nextRound method is called.
         @IBAction func playAgain() {
@@ -224,9 +210,13 @@ class ViewController: UIViewController {
         falseButton.isHidden = false
         buttonFour.isHidden = false
         buttonTwo.isHidden = false
-        
+            
+            // fill question bank
+            reviveQuestions()
+            
         questionsAsked = 0
         correctQuestions = 0
+        
         nextRound()
     }
 

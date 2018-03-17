@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -19,11 +24,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K17-uy-MvB">
-                                <rect key="frame" x="70" y="568" width="200" height="50"/>
+                                <rect key="frame" x="66" y="400" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.0" green="0.57647058823529407" blue="0.52941176470588236" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="3t7-aK-utX"/>
@@ -55,7 +60,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AS4-HX-g9f">
-                                <rect key="frame" x="10" y="466" width="140" height="39"/>
+                                <rect key="frame" x="10" y="298" width="140" height="39"/>
                                 <color key="backgroundColor" red="0.047058823530000002" green="0.47450980390000003" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="KWe-ke-Tha"/>
@@ -89,7 +94,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FJC-6l-9cm">
-                                <rect key="frame" x="254" y="397" width="140" height="39"/>
+                                <rect key="frame" x="164" y="229" width="140" height="39"/>
                                 <color key="backgroundColor" red="0.047058823530000002" green="0.47450980390000003" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="B40-Hm-dDR"/>
@@ -123,7 +128,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhu-N5-mr3">
-                                <rect key="frame" x="254" y="466" width="140" height="39"/>
+                                <rect key="frame" x="164" y="298" width="140" height="39"/>
                                 <color key="backgroundColor" red="0.047058823530000002" green="0.47450980390000003" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="1yb-xO-A8v"/>
@@ -157,7 +162,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1V-MS-ECi">
-                                <rect key="frame" x="10" y="397" width="140" height="39"/>
+                                <rect key="frame" x="10" y="229" width="140" height="39"/>
                                 <color key="backgroundColor" red="0.047058823529411764" green="0.47450980392156861" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="39" id="Yyv-te-Hpz"/>
@@ -270,9 +275,9 @@
                                 <exclude reference="ZMR-hy-FN2"/>
                                 <exclude reference="nYI-L8-6jB"/>
                                 <exclude reference="ihx-YD-7xk"/>
-                                <exclude reference="gaZ-Vw-WP9"/>
                                 <exclude reference="XI4-Bb-xjK"/>
                                 <exclude reference="ZQq-qN-UeV"/>
+                                <exclude reference="gaZ-Vw-WP9"/>
                                 <exclude reference="Fng-Mz-5vf"/>
                                 <exclude reference="dBP-Qf-3iU"/>
                                 <exclude reference="6xZ-DD-aaa"/>
@@ -294,12 +299,12 @@
                                 <exclude reference="oRx-ah-Eo5"/>
                                 <exclude reference="9p7-0U-fyd"/>
                                 <include reference="ihx-YD-7xk"/>
-                                <exclude reference="Vcf-kr-x3L"/>
-                                <include reference="gaZ-Vw-WP9"/>
                                 <exclude reference="NuI-LW-bvD"/>
                                 <include reference="XI4-Bb-xjK"/>
                                 <include reference="ZQq-qN-UeV"/>
                                 <exclude reference="qtD-VY-hAg"/>
+                                <exclude reference="Vcf-kr-x3L"/>
+                                <include reference="gaZ-Vw-WP9"/>
                                 <include reference="Fng-Mz-5vf"/>
                                 <include reference="dBP-Qf-3iU"/>
                                 <exclude reference="tg2-Va-Y26"/>

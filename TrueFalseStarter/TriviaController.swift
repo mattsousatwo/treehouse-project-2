@@ -54,7 +54,7 @@ struct Answers {
         "d) 9:40 minutes"
  ]
     let questionTwoAnswers = [
-        "a) Tentacle",
+        "a) Tentacle", 
         "b) Beak", // correct answer
         "c) Head",
         "d) Arms"
