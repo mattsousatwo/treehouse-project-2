@@ -10,9 +10,9 @@
 // ~~~~~~~~~~~~~~~~~~~~~~
 // ~~~~ To Do List ~~~~~~
 
-// - add label at the top of the screen to display question number and the number of total questions
-// - fix checkAnswers()
-// - move functions to another file, not the viewController
+// - Refactor UI
+// 
+// - Refactor to MVC
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~
@@ -26,11 +26,8 @@ class ViewController: UIViewController {
     let questionsPerRound = 4
     var questionsAsked = 0
     var correctQuestions = 0
-    var shownQuestion = [String]()
     
     var gameSound: SystemSoundID = 0
-    
-    
     
     var trivia = TriviaQA()
  
@@ -42,7 +39,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonTwo: UIButton!      // 2nd button b)
     @IBOutlet weak var buttonFour: UIButton!     // 4th button d)
     
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,9 +64,7 @@ class ViewController: UIViewController {
         questionField.text = question
         
         playAgainButton.isHidden = true
-        
     }
-
 
     // displayAmswers() this function will display the correct answers for each array, and then add that question from the questionsArray to a new array called shownQuestions
     func displayAnswers() {
@@ -82,19 +76,6 @@ class ViewController: UIViewController {
         buttonFour.setTitle(answersArray[3], for: .normal)
        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     // remove questions from question bank and added to an array of used questions
     func removeQuestion() {
@@ -108,19 +89,7 @@ class ViewController: UIViewController {
         trivia.usedQuestions.removeAll()
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     // displayScore() this func will hide the answer buttons and show the play again button. when this function is called, it will display the score at the top of the screen using string interpolation
-    
     func displayScore() {
         // Hide the answer buttons
         trueButton.isHidden = true
@@ -151,25 +120,47 @@ class ViewController: UIViewController {
     // checkAnswers() this function will check if the answer button being pressed is the corresponding correct answer for the displayed question. When the correct answer is selected then the correctQuestions array is incremented by one, and will display a string saying that the user is correct, or wrong if a wrong answer is selected. when an answer is correct, the questionsAsked array is also incremented by one.
     @IBAction func checkAnswer(_ sender: UIButton) {
         
-        var correctAnswer: UIButton = sender
+     
         
-        if questionField.text == trivia.randomQuestion(questionIndex: 0) {
-            correctAnswer = trueButton
-        } else if questionField.text == trivia.randomQuestion(questionIndex: 1) {
-            correctAnswer = buttonTwo
-        } else if questionField.text == trivia.randomQuestion(questionIndex: 2) {
-            correctAnswer = trueButton
-        } else if questionField.text == trivia.randomQuestion(questionIndex: 3) {
-            correctAnswer = falseButton
-        }
+        //    (sender === trueButton && trueButton.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) || (sender === buttonTwo && buttonTwo.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) || (sender === falseButton && falseButton.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) || (sender === buttonFour && buttonFour.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex))
         
-    //    (sender === trueButton && trueButton.titleLabel!.text == trivia.correctAnswer(randomNumber: 0))
-        
+/*
+ 
+         var choice: UIButton = sender
+         
+         if questionField.text == trivia.randomQuestion(qustionIndex: questionIndex) {
+         correctAnswer = trivia.correctAnswer(questionIndex: questionIndex)
+    
+         }
+         
+         
+         MARCH 17 1:10 AM
+         (sender === trueButton && correctAnswer == trueButton) || (sender === buttonTwo && correctAnswer == buttonTwo) || (sender === falseButton && correctAnswer == falseButton) || (sender === buttonFour && correctAnswer == buttonFour)
+         
+         
+        ~~~~~~
+         var correctAnswer: UIButton = sender
+         
+         if questionField.text == trivia.randomQuestion(questionIndex: 0) {
+         correctAnswer = trueButton
+         } else if questionField.text == trivia.randomQuestion(questionIndex: 1) {
+         correctAnswer = buttonTwo
+         } else if questionField.text == trivia.randomQuestion(questionIndex: 2) {
+         correctAnswer = trueButton
+         } else if questionField.text == trivia.randomQuestion(questionIndex: 3) {
+         correctAnswer = falseButton
+         }
+         
+         
+ */
         
         // Increment the questions asked counter
         questionsAsked += 1
       
-        if (sender === trueButton && correctAnswer == trueButton) || (sender === buttonTwo && correctAnswer == buttonTwo) || (sender === falseButton && correctAnswer == falseButton) || (sender === buttonFour && correctAnswer == buttonFour) {
+        if  (sender === trueButton && trueButton.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) ||
+            (sender === buttonTwo && buttonTwo.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) ||
+            (sender === falseButton && falseButton.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) ||
+            (sender === buttonFour && buttonFour.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) {
             
             correctQuestions += 1
             
