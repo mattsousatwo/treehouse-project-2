@@ -17,7 +17,7 @@ struct quizStructure {
     let correctAnswer: String
 }
 
-
+    // question bank of question, answer, correct answer tuples
 struct TriviaQA {
     var questions: [quizStructure] = [
         quizStructure(question: "How long does it take for light from the Sun to reach the Earth?",
@@ -43,7 +43,7 @@ struct TriviaQA {
     
     // func to pull a question out of the Trivia Pool
     func randomQuestion(questionIndex: Int) -> String {
-        let chosenQAKey = questions[questionIndex]             // error
+        let chosenQAKey = questions[questionIndex]      
         return chosenQAKey.question
     }
     
@@ -59,6 +59,7 @@ struct TriviaQA {
         return selectedQuestion.correctAnswer
     }
     
+    // array of used questions and answer tuples
     var usedQuestions: [quizStructure] = []
     
 }
