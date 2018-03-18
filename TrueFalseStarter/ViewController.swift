@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     
     var gameSound: SystemSoundID = 0
     
-    var trivia = TriviaQA()
+    var trivia = TriviaQA() 
  
     
     @IBOutlet weak var questionField: UILabel!
@@ -47,9 +47,8 @@ class ViewController: UIViewController {
         playGameStartSound()
         displayQuestion()
         displayAnswers()
-        
-        
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -105,58 +104,12 @@ class ViewController: UIViewController {
         
     }
     
-    
-    // some notes
-    
-    /* 
-     trueButton: UIButton!     // 1st button a)
-     buttonTwo: UIButton!      // 2nd button b)
-     falseButton: UIButton!    // 3rd button c)
-     buttonFour: UIButton!     // 4th button d)
-     */
-     
-     
-   
-    // checkAnswers() this function will check if the answer button being pressed is the corresponding correct answer for the displayed question. When the correct answer is selected then the correctQuestions array is incremented by one, and will display a string saying that the user is correct, or wrong if a wrong answer is selected. when an answer is correct, the questionsAsked array is also incremented by one.
+    // checkAnswers() will check if the button being pressed is the corresponding correct answer. If the correct answer is selected then the correctQuestions array is incremented by one, and will display a string saying that the user is correct, or wrong if a wrong answer is selected. when an answer is correct, the questionsAsked array is also incremented by one.
     @IBAction func checkAnswer(_ sender: UIButton) {
-        
-     
-        
-        //    (sender === trueButton && trueButton.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) || (sender === buttonTwo && buttonTwo.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) || (sender === falseButton && falseButton.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) || (sender === buttonFour && buttonFour.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex))
-        
-/*
- 
-         var choice: UIButton = sender
-         
-         if questionField.text == trivia.randomQuestion(qustionIndex: questionIndex) {
-         correctAnswer = trivia.correctAnswer(questionIndex: questionIndex)
-    
-         }
-         
-         
-         MARCH 17 1:10 AM
-         (sender === trueButton && correctAnswer == trueButton) || (sender === buttonTwo && correctAnswer == buttonTwo) || (sender === falseButton && correctAnswer == falseButton) || (sender === buttonFour && correctAnswer == buttonFour)
-         
-         
-        ~~~~~~
-         var correctAnswer: UIButton = sender
-         
-         if questionField.text == trivia.randomQuestion(questionIndex: 0) {
-         correctAnswer = trueButton
-         } else if questionField.text == trivia.randomQuestion(questionIndex: 1) {
-         correctAnswer = buttonTwo
-         } else if questionField.text == trivia.randomQuestion(questionIndex: 2) {
-         correctAnswer = trueButton
-         } else if questionField.text == trivia.randomQuestion(questionIndex: 3) {
-         correctAnswer = falseButton
-         }
-         
-         
- */
-        
         // Increment the questions asked counter
         questionsAsked += 1
       
+        // matching the correct answer to the button with the same label as the correct answers string value
         if  (sender === trueButton && trueButton.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) ||
             (sender === buttonTwo && buttonTwo.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) ||
             (sender === falseButton && falseButton.titleLabel!.text == trivia.correctAnswer(questionIndex: questionIndex)) ||
@@ -166,7 +119,7 @@ class ViewController: UIViewController {
             
             questionField.text = "Correct!"
         } else {
-            questionField.text = "Sorry, wrong answer!"
+           questionField.text = "Sorry, wrong answer!"
         }
         
         // remove question from question bank
@@ -194,7 +147,7 @@ class ViewController: UIViewController {
     }
     
     
-    // setting the playAgains action to show the answer buttons after play again is pressed. questions asked and correct questions are reset to 0, and the nextRound method is called.
+    // setting the playAgain func to show the answer buttons after play again is pressed, questions asked and correct questions are reset to 0, the reviveQuestions func is called, and the nextRound method is called.
         @IBAction func playAgain() {
         // Show the answer buttons
         trueButton.isHidden = false
