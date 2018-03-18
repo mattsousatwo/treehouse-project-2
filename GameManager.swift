@@ -27,11 +27,23 @@ struct TriviaQA {
                       answers: ["a) Tentacle","b) Beak", "c) Head", "d) Arms"],
                       correctAnswer: "b) Beak"),
         quizStructure(question: "What was the first planet to be discovered using a telecope?",
-                      answers: ["a) Uranus","b) Venus","c) Jupiter","d) Mars"],
+                      answers: ["a) Uranus","b) Venus","c) Neptune","d) Mars"],
                       correctAnswer: "a) Uranus"),
         quizStructure(question: "What is the worlds largest active volcano?",
                       answers: ["a) Kilimanjaro", "b) Mauna Loa", "c) Tamu Massif", "d) Sierra Negra"],
-                      correctAnswer: "c) Tamu Massif")
+                      correctAnswer: "c) Tamu Massif"),
+        quizStructure(question: "Which planet has the most moons?",
+                      answers: ["a) Earth","b) Jupiter","c) Saturn","d) Mercury"],
+                      correctAnswer: "b) Jupiter"),
+        quizStructure(question: "What is the capital of Australia?",
+                      answers: ["a) Sydney", "b) Melbourne", "c) Canberra", "d) Brisbane"],
+                      correctAnswer: "c) Canberra"),
+        quizStructure(question: "If a bone is navicular, then that bone is what shape?",
+                      answers: ["a) Shaped like a \"U\"", "b) Shaped like an oval", "c) Shaped like a boat", "d) Shaped like a triangle"],
+                      correctAnswer: "c) Shaped like a boat"),
+        quizStructure(question: "What part of the body is your \"oxter\"?",
+                      answers: ["a) Your chest", "b) Your armpit", "c) Your spine", "d) Your neck"],
+                      correctAnswer: "b) Your armpit")
     ]
     
     
@@ -43,7 +55,7 @@ struct TriviaQA {
     
     // func to pull a question out of the Trivia Pool
     func randomQuestion(questionIndex: Int) -> String {
-        let chosenQAKey = questions[questionIndex]      
+        let chosenQAKey = questions[questionIndex]
         return chosenQAKey.question
     }
     
